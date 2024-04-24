@@ -1,5 +1,7 @@
 # cse210-student-template
-This is the starter code for students in CSE 210.
+
+This repository will host work completed by Tim Sansone for the 
+BYU-I Spring Semester 2024.
 
 This repository contains the starter code for many different projects. They are arranged as follows:
 
