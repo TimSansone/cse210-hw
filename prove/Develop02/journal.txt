@@ -1,3 +1,8 @@
-Date: 5/6/2024 11:54:02 PM, Prompt: 1, Response: My wife
-Date: 5/6/2024 11:55:05 PM, Prompt: 1, Response: My wife
-Date: 5/6/2024 11:55:15 PM, Prompt: 2, Response: Spending time with my children
+Date: 05-16-2024 02:38:50
+Question: How did you see the hand of the Lord in your life today?
+Response: by visiting the temple
+---------------------------------------------------
+Date: 05-16-2024 02:40:03
+Question: What was the best part of your day?
+Response: getting some rest before starting my homework
+---------------------------------------------------
