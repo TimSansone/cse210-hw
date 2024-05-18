@@ -15,13 +15,13 @@ class JournalEntry
     public string Response; 
 
     // Constructor to initialize the JournalEntry with date, question, and response
-    public JournalEntry(string date, string question, string response)
+    public JournalEntry(string _date, string _question, string _response)
     {
         // Set the Date property to the provided date value
-        Date = date;  
+        Date = _date;  
         // Set the Question property to the provided question value
-        Question = question; 
+        Question = _question; 
         // Set the Response property to the provided response value
-        Response = response; 
+        Response = _response; 
     }
 }

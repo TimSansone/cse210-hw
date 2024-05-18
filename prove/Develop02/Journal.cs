@@ -10,9 +10,9 @@ class Journal
     private List<JournalEntry> entries = new List<JournalEntry>();
 
     // Add a new journal entry to the list
-    public void AddEntry(string date, string question, string response)
+    public void AddEntry(string _date, string _question, string _response)
     {
-        entries.Add(new JournalEntry(date, question, response ));
+        entries.Add(new JournalEntry(_date, _question, _response ));
         Console.WriteLine("Your journal entry has been added.");
     }
 
@@ -57,10 +57,10 @@ public void DisplayEntries()
 
     // Save journal entries to a file using StreamWriter
     // Method to save journal entries to a file
-public void SaveToFile(string filename)
+public void SaveToFile(string _filename)
 {
     // Open the specified file for writing
-    using (StreamWriter writer = new StreamWriter(filename)) 
+    using (StreamWriter writer = new StreamWriter(_filename)) 
     {
         // Iterate through each journal entry
         foreach (var entry in entries) 
@@ -76,19 +76,19 @@ public void SaveToFile(string filename)
         }
     }
     // Display success message
-    Console.WriteLine($"Your journal has been successfully saved in {filename}.");  
+    Console.WriteLine($"Your journal has been successfully saved in {_filename}.");  
 }
 
     // Load journal entries from a file
     // Method to load journal entries from a file
-public void LoadFromFile(string filename)
+public void LoadFromFile(string _filename)
 {
     // Clear the existing entries list before loading new entries
     entries.Clear();  
     try
     {
         // Open the specified file for reading
-        using (StreamReader reader = new StreamReader(filename))  
+        using (StreamReader reader = new StreamReader(_filename))  
         {
             // Initialize a variable to store the current journal entry
             JournalEntry entry = null;  
