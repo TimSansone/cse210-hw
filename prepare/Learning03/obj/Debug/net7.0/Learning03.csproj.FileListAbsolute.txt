@@ -1,0 +1,15 @@
+C:\Users\solrb\OneDrive\cse210\cse210\cse210-hw\prepare\Learning03\bin\Debug\net7.0\Learning03.exe
+C:\Users\solrb\OneDrive\cse210\cse210\cse210-hw\prepare\Learning03\bin\Debug\net7.0\Learning03.deps.json
+C:\Users\solrb\OneDrive\cse210\cse210\cse210-hw\prepare\Learning03\bin\Debug\net7.0\Learning03.runtimeconfig.json
+C:\Users\solrb\OneDrive\cse210\cse210\cse210-hw\prepare\Learning03\bin\Debug\net7.0\Learning03.dll
+C:\Users\solrb\OneDrive\cse210\cse210\cse210-hw\prepare\Learning03\bin\Debug\net7.0\Learning03.pdb
+C:\Users\solrb\OneDrive\cse210\cse210\cse210-hw\prepare\Learning03\obj\Debug\net7.0\Learning03.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\solrb\OneDrive\cse210\cse210\cse210-hw\prepare\Learning03\obj\Debug\net7.0\Learning03.AssemblyInfoInputs.cache
+C:\Users\solrb\OneDrive\cse210\cse210\cse210-hw\prepare\Learning03\obj\Debug\net7.0\Learning03.AssemblyInfo.cs
+C:\Users\solrb\OneDrive\cse210\cse210\cse210-hw\prepare\Learning03\obj\Debug\net7.0\Learning03.csproj.CoreCompileInputs.cache
+C:\Users\solrb\OneDrive\cse210\cse210\cse210-hw\prepare\Learning03\obj\Debug\net7.0\Learning03.sourcelink.json
+C:\Users\solrb\OneDrive\cse210\cse210\cse210-hw\prepare\Learning03\obj\Debug\net7.0\Learning03.dll
+C:\Users\solrb\OneDrive\cse210\cse210\cse210-hw\prepare\Learning03\obj\Debug\net7.0\refint\Learning03.dll
+C:\Users\solrb\OneDrive\cse210\cse210\cse210-hw\prepare\Learning03\obj\Debug\net7.0\Learning03.pdb
+C:\Users\solrb\OneDrive\cse210\cse210\cse210-hw\prepare\Learning03\obj\Debug\net7.0\Learning03.genruntimeconfig.cache
+C:\Users\solrb\OneDrive\cse210\cse210\cse210-hw\prepare\Learning03\obj\Debug\net7.0\ref\Learning03.dll
