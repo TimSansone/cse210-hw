@@ -1,7 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 
-// Derived class for listing activity
 class ListingActivity : Activity
 {
     private string[] prompts = new string[]
@@ -12,9 +12,10 @@ class ListingActivity : Activity
         "List as many movies as you can"
     };
 
+    private Dictionary<string, int> leaderboard = new Dictionary<string, int>();
+
     public override void StartActivity()
     {
-        // Calls the base class method
         base.StartActivity();
 
         Random rnd = new Random();
@@ -23,11 +24,14 @@ class ListingActivity : Activity
         Console.WriteLine("List as many items as you can for the following category:");
         Console.WriteLine(selectedPrompt);
 
-        // Prompts the user to enter the duration for the activity
+        if (leaderboard.ContainsKey(selectedPrompt))
+        {
+            Console.WriteLine($"Current highest score for this category: {leaderboard[selectedPrompt]} items");
+        }
+
         Console.Write("Enter the duration for the listing activity (in seconds): ");
         _duration = Convert.ToInt32(Console.ReadLine());
 
-        // Perform the listing activity
         PerformListingActivity(selectedPrompt);
     }
 
@@ -36,52 +40,47 @@ class ListingActivity : Activity
         Console.Clear();
         Console.WriteLine("Get ready to start the listing activity...");
         Console.WriteLine("Press 'enter' when you are ready to start.");
-        // Wait for the user to press 'enter'
         Console.ReadLine();
 
         int remainingTime = _duration;
         int itemsListed = 0;
         bool activityEnded = false;
 
-        // Timer thread to update the remaining time
+        // Start the countdown thread
         Thread countdownThread = new Thread(() =>
         {
             while (remainingTime > 0 && !activityEnded)
             {
-                // Waits for 1 second
                 Thread.Sleep(1000);
                 remainingTime--;
 
-                // Save the current cursor position
-                int cursorLeft = Console.CursorLeft;
-                int cursorTop = Console.CursorTop;
+                // Lock console updates to avoid conflicts
+                lock (Console.Out)
+                {
+                    UpdateTimerDisplay(remainingTime);
+                }
 
-                // Update the countdown timer display at the top
-                Console.SetCursorPosition(0, 0);
-                Console.Write("Time remaining: " + remainingTime + " seconds".PadRight(Console.WindowWidth - 1));
-
-                // Display the prompt
-                Console.SetCursorPosition(0, 1);
-                Console.Write(prompt.PadRight(Console.WindowWidth - 1));
-
-                // Restore the cursor position
-                Console.SetCursorPosition(cursorLeft, cursorTop);
+                if (remainingTime <= 0)
+                {
+                    activityEnded = true;
+                }
             }
-            // Signal to end the activity when the time has expired
-            activityEnded = true; 
         });
 
         countdownThread.Start();
 
-        // Main thread to handle user input
+        // Input items listed by the user
         while (!activityEnded)
         {
-            Console.SetCursorPosition(0, 3 + itemsListed);
-            Console.Write("Enter an item: ");
-            Console.SetCursorPosition(0, 4 + itemsListed);
-            Console.Write("> ");
+            lock (Console.Out)
+            {
+                Console.SetCursorPosition(0, 2);
+                Console.WriteLine(prompt.PadRight(Console.WindowWidth)); // Display the prompt
+                Console.SetCursorPosition(0, 4 + itemsListed);
+                Console.Write("> ");
+                Console.SetCursorPosition(3, 4 + itemsListed); // Position cursor for user input
+            }
 
-            // Check if remaining time is zero to end the input loop
             if (remainingTime <= 0)
             {
                 activityEnded = true;
@@ -98,10 +97,50 @@ class ListingActivity : Activity
 
             itemsListed++;
         }
-        // Wait for the countdown thread to finish
+
         countdownThread.Join();
 
         Console.Clear();
         Console.WriteLine("Listing activity complete! You listed " + itemsListed + " items.");
+
+        if (!leaderboard.ContainsKey(prompt) || itemsListed > leaderboard[prompt])
+        {
+            leaderboard[prompt] = itemsListed;
+            Console.WriteLine("Congratulations! You set a new high score for this category.");
+        }
+    }
+
+    private void UpdateTimerDisplay(int remainingTime)
+    {
+        int currentLineCursor = Console.CursorTop;
+        int currentColCursor = Console.CursorLeft;
+
+        Console.SetCursorPosition(0, 0);
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine($"Time remaining: {remainingTime} seconds".PadRight(Console.WindowWidth));
+        Console.ResetColor();
+        DisplayProgressBar(remainingTime);
+
+        // Restore the cursor position after updating the timer display
+        Console.SetCursorPosition(currentColCursor, currentLineCursor);
+    }
+
+    private void DisplayProgressBar(int remainingTime)
+    {
+        int totalLength = 30;
+        int filledLength = totalLength * remainingTime / _duration;
+
+        Console.SetCursorPosition(0, 1);
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write("[");
+        for (int i = 0; i < totalLength; i++)
+        {
+            if (i < filledLength)
+                Console.Write("=");
+            else
+                Console.Write(" ");
+        }
+        Console.Write("]");
+        Console.ResetColor();
     }
 }
