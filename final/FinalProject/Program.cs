@@ -1,9 +1,17 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.IO;
 
+// Main program class
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        Console.WriteLine("Hello FinalProject World!");
+        while (true)
+        {
+            GameLauncher.StartNewGame(); // Start a new game when the program starts or after each game ends
+        }
     }
 }
