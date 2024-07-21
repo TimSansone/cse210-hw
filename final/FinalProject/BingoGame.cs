@@ -1,25 +1,53 @@
-// Abstract class representing a generic Bingo game
 public abstract class BingoGame
-{
-    // List to store Bingo balls
-    protected List<BingoBall> _balls;
-    // Random number generator
-    protected Random random = new Random();
-
-    public BingoGame()
     {
-        // Initializes the list of Bingo balls
-        _balls = new List<BingoBall>();
-        // Initializes Bingo balls based on game type (can be modified for game variations)
-        InitializeBalls();
-    }
+        protected List<BingoBall> _balls;
+        protected Random random = new Random();
+        protected BingoBall _lastCalledBall;
 
-    // Abstract method to initialize Bingo balls
-    protected abstract void InitializeBalls();
-    // Abstract method to start the game
-    public abstract void StartGame();
-    // Abstract method to call the next Bingo ball
-    public abstract void CallNextBall();
-    // Abstract method to check if Bingo has been called
-    protected abstract void CheckForBingo();
-}
+        protected BingoGame()
+        {
+            _balls = new List<BingoBall>();
+            InitializeBalls();
+        }
+
+        protected abstract void InitializeBalls();
+        public abstract void StartGame();
+        public abstract void CallNextBall();
+        protected abstract void CheckForBingo();
+
+        protected void ShuffleBalls()
+        {
+            for (int i = _balls.Count - 1; i > 0; i--)
+            {
+                int j = random.Next(0, i + 1);
+                BingoBall temp = _balls[i];
+                _balls[i] = _balls[j];
+                _balls[j] = temp;
+            }
+        }
+
+        protected void ResetGame()
+        {
+            _balls.Clear();
+            InitializeBalls();
+            ShuffleBalls();
+        }
+
+        protected void DisplayCalledBalls(List<BingoBall> calledBalls)
+        {
+            Console.WriteLine();
+            if (_lastCalledBall != null)
+            {
+                Console.WriteLine($"The latest Bingo ball called was: {_lastCalledBall._letter}{_lastCalledBall._number}");
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("Here are all of the balls that have been called (in order they were called):");
+            Console.WriteLine();
+            foreach (var ball in calledBalls)
+            {
+                Console.Write($"{ball._letter}{ball._number} ");
+            }
+            Console.WriteLine();
+        }
+    }
